@@ -29,4 +29,16 @@ public class Player : MonoBehaviour
             Flap();
         }
     }
+
+    // 2D Trigger Detection for Player
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // If Player collides with Column
+        if(other.tag == "Column")
+        {
+            // Add a Score through the GameManager
+            GameManager.Instance.AddScore(1);
+        }
+    }
+
 }

@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-  productGUID: 6f5240c482061e5439a28f6b35194b98
+  productGUID: 5a1901e30cf6f6a4395daa413c8699a5
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -587,10 +587,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 6bd46550-7bc2-4ea2-8279-becca1b5adce
+  cloudProjectId: 
   framebufferDepthMemorylessMode: 0
-  projectName: FlappyBird (2)
-  organizationId: nsi-games
+  projectName: 
+  organizationId: 
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

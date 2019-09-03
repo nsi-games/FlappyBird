@@ -33,4 +33,15 @@ public class Player : MonoBehaviour
             Flap();
         }
     }
+    
+    // Event for detecting Trigger Collisons
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        // If colliding with a Column
+        if(col.tag == "Column")
+        {
+            // Add 1 to Score
+            GameManager.Instance.AddScore(1);
+        }
+    }
 }

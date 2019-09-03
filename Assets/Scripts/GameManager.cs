@@ -2,17 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.Events;
+
+public class ScoreAddedEvent : UnityEvent<int> { }
+
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    #region Singleton
+    public static GameManager Instance = null;
+    private void Awake()
     {
-        
+        // Set GameManager as single instance
+        Instance = this;
     }
+    #endregion
 
-    // Update is called once per frame
-    void Update()
+    public ScoreAddedEvent onScoreAdded = new ScoreAddedEvent();
+    private int totalScore = 0;
+
+    public void AddScore(int scoreToAdd)
     {
-        
+        // Add the score to total
+        totalScore += scoreToAdd;
+
+        // Invoke onScoreAdded Event
+        onScoreAdded.Invoke(totalScore);
     }
 }

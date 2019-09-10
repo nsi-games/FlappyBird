@@ -14,13 +14,12 @@ public class Scroll : MonoBehaviour
     {
         // Get the Rigidbody2D Component
         rigid = GetComponent<Rigidbody2D>();
-        // Start the object moving on Velocity
-        rigid.velocity = new Vector2(scrollSpeed, 0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Start the object moving on Velocity
+        rigid.velocity = new Vector2(scrollSpeed * GameManager.Instance.globalSpeed, 0f);
     }
 }

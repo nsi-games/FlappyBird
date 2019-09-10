@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float upForce = 6f;
+    public float forward = 1f;
 
     private Rigidbody2D rigid;
 
@@ -32,8 +33,21 @@ public class Player : MonoBehaviour
             // Player Flies Up!
             Flap();
         }
+
+        // Rotate Bird
+        Vector3 vel = rigid.velocity;
+        float angle = Mathf.Atan2(vel.y, forward) * Mathf.Rad2Deg;
+        angle = Mathf.Clamp(angle, -45f, 45f);
+        transform.eulerAngles = new Vector3(0, 0, angle);
     }
-    
+
+    // If colliding with something
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Game is over!
+        GameManager.Instance.GameOver();
+    }
+
     // Event for detecting Trigger Collisons
     private void OnTriggerEnter2D(Collider2D col)
     {

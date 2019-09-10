@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     #endregion
 
     public ScoreAddedEvent onScoreAdded = new ScoreAddedEvent();
+    public float globalSpeed = 1f;
     private int totalScore = 0;
 
     public void AddScore(int scoreToAdd)
@@ -27,5 +28,10 @@ public class GameManager : MonoBehaviour
 
         // Invoke onScoreAdded Event
         onScoreAdded.Invoke(totalScore);
+    }
+
+    public void GameOver()
+    {
+        globalSpeed = 0f;
     }
 }

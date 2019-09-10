@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float upForce = 6f;
+    public float forward = 1f;
 
     private Rigidbody2D rigid;
 
@@ -28,6 +29,11 @@ public class Player : MonoBehaviour
         {
             Flap();
         }
+
+        // Bird Rotation
+        Vector3 vel = rigid.velocity;
+        float angle = Mathf.Atan2(vel.y, forward) * Mathf.Rad2Deg;
+        transform.eulerAngles = new Vector3(0, 0, angle);
     }
 
     // 2D Trigger Detection for Player

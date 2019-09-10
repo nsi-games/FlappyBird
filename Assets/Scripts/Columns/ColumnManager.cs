@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColumnSpawner : MonoBehaviour
+public class ColumnManager : MonoBehaviour
 {
     public GameObject columnPrefab;     // The column prefab we want to spawn
     public int columnPoolSize = 5;      // How many columns to keep on standby
     public float spawnRate = 3f;        // How quickly each columns spawn
-    public float columnMin = -1f;       // Minimum y value of the column position
-    public float columnMax = 3.5f;      // Maximum y value of the column position
-    public Vector3 standbyPos = new Vector3(-15, -25); // Holding position for the unused columns offscreen
+    public float columnYMin = -1f;       // Minimum y value of the column position
+    public float columnYMax = 3.5f;      // Maximum y value of the column position
+    public Vector3 standbyPos = new Vector3(-15, -25); // Holding position for the unused columns offscreen        public float spawnXPos = 10f;
     public float spawnXPos = 10f;
 
     private GameObject[] columns;       // Collection of pooled columns
@@ -34,10 +34,8 @@ public class ColumnSpawner : MonoBehaviour
     {
         // Count up the timer
         spawnTimer += Time.deltaTime;
-        // Is the game not over AND 
         // Has spawnTimer reached the spawnRate?
-        if (GameManager.Instance.gameOver == false &&
-           spawnTimer >= spawnRate)
+        if (spawnTimer >= spawnRate)
         {
             // Reset timer 
             spawnTimer = 0f;
@@ -49,7 +47,7 @@ public class ColumnSpawner : MonoBehaviour
     void SpawnColumn()
     {
         // Set a random y spawn position for the column
-        float spawnYPos = Random.Range(columnMin, columnMax);
+        float spawnYPos = Random.Range(columnYMin, columnYMax);
         // Get current column
         GameObject column = columns[currentColumn];
         // Set position of current column

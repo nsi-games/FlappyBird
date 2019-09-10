@@ -4,10 +4,11 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
-public class ScoreUI : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
-    public Sprite[] numbers;            // Stores all the flappy digits
     public GameObject scoreTextPrefab;  // Score Prefab text element to create
+    public Transform scoreTextParent; // Parent GameObject to spawn ScoreUI
+    public Sprite[] numbers;            // Stores all the flappy digits
     public Vector3 standbyPos = new Vector3(-15, 15); // Position offscreen for standby
     public int maxDigits = 5;           // The amount of digits to store offscreen for reuse
 
@@ -23,13 +24,11 @@ public class ScoreUI : MonoBehaviour
         for (int i = 0; i < maxDigits; i++)
         {
             // Create a new gameObject offscreen
-            GameObject clone = Instantiate(scoreTextPrefab, standbyPos, Quaternion.identity);
+            GameObject clone = Instantiate(scoreTextPrefab, scoreTextParent);
             // Get the Image component attached to the clone
             Image img = clone.GetComponent<Image>();
             // Set sprite to corresponding number sprite
             img.sprite = numbers[i];
-            // Attach to self
-            clone.transform.SetParent(transform);
             // Set name of text to index
             clone.name = i.ToString();
             // Add it to pool
@@ -37,7 +36,7 @@ public class ScoreUI : MonoBehaviour
         }
 
         // Subscribe to GameManager's added score event
-        GameManager.Instance.scoreAdded += UpdateScore;
+        GameManager.Instance.onScoreAdded.AddListener(UpdateScore);
 
         // Update score to start on zero
         UpdateScore(0);

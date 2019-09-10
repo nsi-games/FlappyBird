@@ -2,53 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEngine.Events;
+
+public class ScoreAddedEvent : UnityEvent<int> { }
+
 public class GameManager : MonoBehaviour
 {
-    public bool gameOver = false;
-    public float scrollSpeed = -1.5f;
-    public int score = 0;
-
+    #region Singleton
     public static GameManager Instance = null;
-
-    public delegate void ScoreAddedCallback(int score);
-    public ScoreAddedCallback scoreAdded;
-
-    // Use this for initialization
-    void Awake()
+    private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(this);
-        }
+        // Set GameManager as single instance
+        Instance = this;
+    }
+    #endregion
+
+    public ScoreAddedEvent onScoreAdded = new ScoreAddedEvent();
+    public float globalSpeed = 1f;
+    private int totalScore = 0;
+
+    public void AddScore(int scoreToAdd)
+    {
+        // Add the score to total
+        totalScore += scoreToAdd;
+
+        // Invoke onScoreAdded Event
+        onScoreAdded.Invoke(totalScore);
     }
 
-    public void BirdScored()
+    public void GameOver()
     {
-        // The bird cant score if there is a game over
-        if (gameOver)
-        {
-            // Exit the function
-            return;
-        }
-
-        // Increase the score
-        score++;
-
-        // If there is a function subscribed
-        if (scoreAdded != null)
-        {
-            // Call an event to state that a score has been added
-            scoreAdded.Invoke(score);
-        }
-    }
-
-    public void BirdDied()
-    {
-        // Set game over to true
-        gameOver = true;
+        globalSpeed = 0f;
     }
 }

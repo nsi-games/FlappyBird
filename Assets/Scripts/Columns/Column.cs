@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Column : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D other)
+    // Start is called before the first frame update
+    void Start()
     {
-        // Have we collided with the bird?
-        if (other.name.Contains("Bird"))
-        {
-            // Then the bird scored
-            GameManager.Instance.BirdScored();
-        }
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }

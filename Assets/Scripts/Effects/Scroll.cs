@@ -5,23 +5,21 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Scroll : MonoBehaviour
 {
+    public float scrollSpeed = -5f;
+
     private Rigidbody2D rigid;
 
-    // Use this for initialization
+    // Start is called before the first frame update
     void Start()
     {
+        // Get the Rigidbody2D Component
         rigid = GetComponent<Rigidbody2D>();
-        rigid.velocity = new Vector2(GameManager.Instance.scrollSpeed, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Check if game is over
-        if (GameManager.Instance.gameOver)
-        {
-            // Cancel velocity to stop scrolling
-            rigid.velocity = Vector2.zero;
-        }
+        // Start the object moving on Velocity
+        rigid.velocity = new Vector2(scrollSpeed * GameManager.Instance.globalSpeed, 0f);
     }
 }
